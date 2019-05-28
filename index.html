@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <script src="http://localhost:4000/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="utf-8" />
+    <title>kajino</title>
+  </head>
+  <body>
+    <form name="int">
+      <h2>1.<span style="color:red">回したい数</span>を入力</h2>
+      <input type="num" name="number" />
+      <h2>2.下のボタンをPush</h2>
+      <input type="submit" value="get" name="btn" />
+    </form>
+
+    <p>Get By</p>
+    <div id="title"></div>
+    <div id="time"></div>
+    <h2>ファイル↓</h2>
+    <div id="fin"></div>
+    <li id="file"></li>
+    <script>
+      let socket = io.connect();
+      $(`form[name="int"]`).submit(function(e) {
+        let num = $(`input[name="number"]`).val();
+
+        let time = document.getElementById("time");
+        time.innerHTML = num * 5 + "秒後xlsx出力致します．";
+
+        socket.emit("test", num);
+        socket.on("title", item => {
+          let a = document.getElementById("title");
+          a.innerHTML = item;
+        });
+        e.preventDefault();
+      });
+
+      socket.on("fin", fin => {
+        let end = document.getElementById("fin");
+        console.log(fin);
+        let blob = new Blob([fin], { type: "text/xlsx" });
+        console.log(blob);
+        objectURL = URL.createObjectURL(blob);
+        console.log(objectURL);
+        end.innerHTML = objectURL;
+        $("#file").append("<a href='" + blob + "'>Download</a>");
+      });
+    </script>
+  </body>
+</html>

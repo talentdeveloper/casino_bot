@@ -1,0 +1,19 @@
+{
+  "name": "kkk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "yuta-motegi",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio-httpcli": "^0.7.4",
+    "react": "^16.8.6",
+    "socket.io": "^2.2.0",
+    "xlsx": "^0.14.2",
+    "xlsx-populate": "^1.19.1"
+  }
+}
