@@ -17,6 +17,7 @@
     <p>Get By</p>
     <div id="title"></div>
     <div id="time"></div>
+    <div id="counttime"></div>
     <h2>ファイル↓</h2>
     <div id="fin"></div>
     <li id="file"></li>
@@ -27,6 +28,17 @@
 
         let time = document.getElementById("time");
         time.innerHTML = num * 5 + "秒後xlsx出力致します．";
+        
+        var countup = function(){
+          count-- ;
+          let counttime = document.getElementById("counttime") ;
+          counttime.innerHTML= count+"秒後xlsx出力致します．" ;
+        }
+        var id = setInterval(function(){
+       countup();
+       if(count == 0){　
+         clearInterval(id);　//idをclearIntervalで指定している
+       }}, 1000);
 
         socket.emit("test", num);
         socket.on("title", item => {
