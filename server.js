@@ -333,7 +333,8 @@ function exe(box) {
       sheet1.cell("D20").value(redbox.length);
       sheet1.cell("E20").value(blackbox.length);
     }
-    book.toFileAsync("./Test.xlsx");
+     var today = new Date();
+    book.toFileAsync("./"+today+"Test.xlsx");
   });
   let a = box.num;
   console.log("exeから :" + a);
