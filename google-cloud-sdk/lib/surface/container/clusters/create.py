@@ -185,7 +185,7 @@ def ParseCreateOptionsBase(args):
     args.scopes = []
   flags.MungeBasicAuthFlags(args)
   cluster_ipv4_cidr = args.cluster_ipv4_cidr
-  enable_master_authorized_networks = args.enable_master_authorized_networks
+  enable_main_authorized_networks = args.enable_main_authorized_networks
   return api_adapter.CreateClusterOptions(
       additional_zones=args.additional_zones,
       addons=args.addons,
@@ -204,13 +204,13 @@ def ParseCreateOptionsBase(args):
       enable_ip_alias=args.enable_ip_alias,
       enable_kubernetes_alpha=args.enable_kubernetes_alpha,
       enable_legacy_authorization=args.enable_legacy_authorization,
-      enable_master_authorized_networks=enable_master_authorized_networks,
+      enable_main_authorized_networks=enable_main_authorized_networks,
       enable_network_policy=args.enable_network_policy,
       image_type=args.image_type,
       labels=args.labels,
       local_ssd_count=args.local_ssd_count,
       maintenance_window=args.maintenance_window,
-      master_authorized_networks=args.master_authorized_networks,
+      main_authorized_networks=args.main_authorized_networks,
       max_nodes=args.max_nodes,
       max_nodes_per_pool=args.max_nodes_per_pool,
       min_nodes=args.min_nodes,
@@ -249,7 +249,7 @@ class Create(base.CreateCommand):
     flags.AddLabelsFlag(parser, suppressed=True)
     flags.AddLocalSSDFlag(parser, suppressed=True)
     flags.AddMaintenanceWindowFlag(parser, hidden=True)
-    flags.AddMasterAuthorizedNetworksFlags(parser, hidden=True)
+    flags.AddMainAuthorizedNetworksFlags(parser, hidden=True)
     flags.AddNetworkPolicyFlags(parser, hidden=True)
     flags.AddNodeTaintsFlag(parser, hidden=True)
     flags.AddOldClusterScopesFlag(parser)
@@ -361,7 +361,7 @@ class CreateBeta(Create):
     flags.AddLabelsFlag(parser)
     flags.AddLocalSSDFlag(parser)
     flags.AddMaintenanceWindowFlag(parser)
-    flags.AddMasterAuthorizedNetworksFlags(parser)
+    flags.AddMainAuthorizedNetworksFlags(parser)
     flags.AddMinCpuPlatformFlag(parser)
     flags.AddNetworkPolicyFlags(parser, hidden=True)
     flags.AddNodeTaintsFlag(parser)
@@ -398,7 +398,7 @@ class CreateAlpha(Create):
     flags.AddLabelsFlag(parser)
     flags.AddLocalSSDFlag(parser)
     flags.AddMaintenanceWindowFlag(parser)
-    flags.AddMasterAuthorizedNetworksFlags(parser)
+    flags.AddMainAuthorizedNetworksFlags(parser)
     flags.AddMinCpuPlatformFlag(parser)
     flags.AddWorkloadMetadataFromNodeFlag(parser, hidden=True)
     flags.AddNetworkPolicyFlags(parser, hidden=False)

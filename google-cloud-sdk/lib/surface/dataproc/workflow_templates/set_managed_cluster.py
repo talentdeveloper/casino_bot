@@ -36,14 +36,14 @@ class SetManagedCluster(base.UpdateCommand):
     flags.AddZoneFlag(parser)
 
     parser.add_argument(
-        '--num-masters',
+        '--num-mains',
         type=int,
         help="""\
-      The number of master nodes in the cluster.
+      The number of main nodes in the cluster.
 
       [format="csv",options="header"]
       |========
-      Number of Masters,Cluster Mode
+      Number of Mains,Cluster Mode
       1,Standard
       3,High Availability
       |========
@@ -55,7 +55,7 @@ class SetManagedCluster(base.UpdateCommand):
         help="""\
       Create a single node cluster.
 
-      A single node cluster has all master and worker components.
+      A single node cluster has all main and worker components.
       It cannot have any separate worker nodes.
       """)
 
@@ -84,7 +84,7 @@ class SetManagedCluster(base.UpdateCommand):
         "2017-08-29T18:52:51.142Z"
         """)
 
-    for instance_type in ('master', 'worker'):
+    for instance_type in ('main', 'worker'):
       help_msg = """\
       Attaches accelerators (e.g. GPUs) to the {instance_type}
       instance(s).

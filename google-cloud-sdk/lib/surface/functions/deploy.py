@@ -153,7 +153,7 @@ def _SourceCodeArgs(parser):
             'One of the parameters --source-revision, --source-branch, '
             'or --source-tag can be given to specify the version in the '
             'repository. If none of them are provided, the last revision '
-            'from the master branch is used. If this parameter is given, '
+            'from the main branch is used. If this parameter is given, '
             'the parameter --source is required and describes the path '
             'inside the repository.'),
       action=actions.DeprecationAction(
@@ -179,7 +179,7 @@ def _SourceCodeArgs(parser):
       help=('The branch that will be used to get the source code of the '
             'function.  The most recent revision on this branch will be '
             'used. Can be specified only together with --source-url '
-            'parameter. If not specified defaults to `master`.'),
+            'parameter. If not specified defaults to `main`.'),
       action=actions.DeprecationAction(
           '--source-branch',
           warn='The {flag_name} flag is deprecated; use --source instead.',
@@ -420,7 +420,7 @@ class Deploy(base.Command):
     elif args.source_url:
       deploy_util.CleanOldSourceInfo(base_function)
       source_path = args.source_path
-      source_branch = args.source_branch or 'master'
+      source_branch = args.source_branch or 'main'
       base_function.sourceRepository = messages.SourceRepository(
           url=self._GetSourceUrlFromArgs(
               project, tag=args.source_tag, branch=source_branch,
